@@ -7,21 +7,14 @@ import type {
 } from 'vue'
 import type {
   RouteComponent,
+  RouteLocationMatched,
   RouteLocationNormalizedLoaded,
   RouteLocationNormalizedLoadedGeneric,
   RouterViewProps,
 } from 'vue-router'
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  h,
-  inject,
-  provide,
-  shallowRef,
-  toValue,
-} from 'vue'
-import { RouterView, useRoute, viewDepthKey } from 'vue-router'
+import { computed, defineComponent, getCurrentInstance, h, shallowRef } from 'vue'
+import { RouterView } from 'vue-router'
+import { useExactView } from './hooks/use-exact-view'
 import { getWrappers } from './wrappers'
 
 export interface SlotData {
@@ -33,17 +26,14 @@ export type ResolveViewKey = (
   route: RouteLocationNormalizedLoaded,
 ) => string | void | undefined | null
 
+export type ExactFn = (matchedRoute: RouteLocationMatched) => boolean
+
 export interface BetterRouterViewProps extends RouterViewProps {
   resolveViewKey?: ResolveViewKey
-  exact?: boolean
+  exact?: boolean | number | null
 }
 
-export const BetterRouterView: new () => {
-  $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & BetterRouterViewProps
-  $slots: {
-    default?: (data: SlotData) => VNode[]
-  }
-} = /* #__PURE__ */ defineComponent({
+const BetterRouterViewImpl = /* #__PURE__ */ defineComponent({
   name: 'BetterRouterView',
   inheritAttrs: false,
   props: {
@@ -51,10 +41,11 @@ export const BetterRouterView: new () => {
       type: Function,
     },
     exact: {
-      type: Boolean,
+      type: [Boolean, Number, null],
+      default: null,
     },
   },
-  setup(props: BetterRouterViewProps, { attrs, slots }) {
+  setup(props, { attrs, slots }) {
     const app = getCurrentInstance()!.appContext.app
     const wrappers = getWrappers(app)
 
@@ -89,13 +80,9 @@ export const BetterRouterView: new () => {
       return wrappers.get(name)!
     }
 
-    const route = useRoute()
-    const viewDepth = inject(viewDepthKey, 0)
-    provide(
-      viewDepthKey,
-      // route.matched 最后一个往往就是精确匹配的，这里更改 viewDepth 后可以让其直接渲染对应的视图组件
-      computed(() => (props.exact ? route.matched.length - 1 : toValue(viewDepth))),
-    )
+    useExactView({
+      exact: computed(() => props.exact),
+    })
 
     return () =>
       h(RouterView, attrs, {
@@ -112,3 +99,10 @@ export const BetterRouterView: new () => {
       })
   },
 })
+
+export const BetterRouterView = BetterRouterViewImpl as new () => {
+  $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & BetterRouterViewProps
+  $slots: {
+    default?: (data: SlotData) => VNode[]
+  }
+}
