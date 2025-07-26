@@ -17,13 +17,15 @@ const router = createRouter({
           meta: {
             keepAlive: true,
           },
-        },
-        {
-          path: '/list/detail/:viewKey',
-          component: ListDetail,
-          meta: {
-            keepAlive: true,
-          },
+          children: [
+            {
+              path: 'detail/:viewKey',
+              component: ListDetail,
+              meta: {
+                keepAlive: true,
+              },
+            },
+          ],
         },
 
         {
@@ -32,14 +34,16 @@ const router = createRouter({
           meta: {
             keepAlive: true,
           },
-        },
-        {
-          path: '/list2/detail/:viewKey',
-          component: ListDetail,
-          meta: {
-            keepAlive: true,
-            singleton: true,
-          },
+          children: [
+            {
+              path: 'detail/:viewKey',
+              component: ListDetail,
+              meta: {
+                keepAlive: true,
+                singleton: true,
+              },
+            },
+          ],
         },
       ],
     },

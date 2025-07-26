@@ -48,6 +48,7 @@ watch(
     <BetterRouterView
       v-slot="{ Component: viewComponent }"
       :resolve-view-key
+      exact
     >
       <KeepAlive :include="[...keepAliveValues]">
         <Component
