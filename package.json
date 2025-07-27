@@ -2,7 +2,7 @@
   "name": "vue-router-better-view",
   "type": "module",
   "version": "0.1.0",
-  "description": "Enhances the RouterView & KeepAlive functionality of Vue Router.",
+  "description": "An extension for Vue Router's RouterView with enhanced features.",
   "author": "leihaohao <https://github.com/l246804>",
   "license": "MIT",
   "homepage": "https://github.com/l246804/vue-router-better-view#readme",
@@ -22,7 +22,8 @@
     "taro",
     "h5",
     "web",
-    "webview"
+    "webview",
+    "admin"
   ],
   "publishConfig": {
     "access": "public",
@@ -38,8 +39,6 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "CHANGELOG.md",
-    "README.md",
     "dist"
   ],
   "engines": {
