@@ -5,13 +5,13 @@
   "description": "An extension for Vue Router's RouterView with enhanced features.",
   "author": "leihaohao <https://github.com/l246804>",
   "license": "MIT",
-  "homepage": "https://github.com/l246804/vue-router-better-view#readme",
+  "homepage": "https://github.com/vue-spark/vue-router-better-view#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/l246804/vue-router-better-view"
+    "url": "https://github.com/vue-spark/vue-router-better-view"
   },
   "bugs": {
-    "url": "https://github.com/l246804/vue-router-better-view/issues"
+    "url": "https://github.com/vue-spark/vue-router-better-view/issues"
   },
   "keywords": [
     "vue",
