@@ -7,7 +7,7 @@ An extension for [Vue Router](https://router.vuejs.org/)'s [RouterView](https://
 - [x] Enhanced [RouterView & KeepAlive](https://router.vuejs.org/guide/advanced/router-view-slot.html#KeepAlive-Transition) functionality with support for dynamic parameter route caching
 - [x] Precise rendering (ignore parent routes with components) for intuitive nested route handling
 
-[中文文档](./README.zh-CN.md) | [Online Demo](https://l246804.github.io/vue-router-better-view/)
+[中文文档](./README.zh-CN.md) | [Online Demo](https://vue-spark.github.io/vue-router-better-view/)
 
 ---
 
