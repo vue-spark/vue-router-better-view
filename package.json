@@ -1,7 +1,7 @@
 {
   "name": "vue-router-better-view",
   "type": "module",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An extension for Vue Router's RouterView with enhanced features.",
   "author": "leihaohao <https://github.com/l246804>",
   "license": "MIT",
