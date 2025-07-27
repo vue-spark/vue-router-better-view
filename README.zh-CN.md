@@ -223,4 +223,4 @@ interface BetterRouterViewProps extends RouterViewProps {
 
 | 微信                                    | 支付宝                                   |
 | --------------------------------------- | ---------------------------------------- |
-| <img src="./public/wx.jpg" width="200"> | <img src="./public/zfb.jpg" width="200"> |
+| <img src="./public/wx.png" width="200"> | <img src="./public/zfb.png" width="200"> |

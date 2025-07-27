@@ -224,4 +224,4 @@ Your support fuels continuous improvement! If this project helps you, consider b
 
 | WeChat                                  | Alipay                                   |
 | --------------------------------------- | ---------------------------------------- |
-| <img src="./public/wx.jpg" width="200"> | <img src="./public/zfb.jpg" width="200"> |
+| <img src="./public/wx.png" width="200"> | <img src="./public/zfb.png" width="200"> |
