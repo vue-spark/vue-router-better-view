@@ -126,7 +126,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: 'user',
-        component: UserLayout,
+        component: UserList,
         children: [
           {
             path: 'detail/:id?',
