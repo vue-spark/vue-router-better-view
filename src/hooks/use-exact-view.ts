@@ -1,7 +1,9 @@
-import type { MaybeRefOrGetter, Reactive } from 'vue'
+import type { ComputedRef, MaybeRef, Reactive } from 'vue'
 import { computed, inject, provide, toValue } from 'vue'
 import { useRoute, viewDepthKey } from 'vue-router'
-import { isBoolean } from '../utils'
+import { isBoolean, isFunction } from '../utils'
+
+export type ExactValue = boolean | number | null
 
 export interface UseExactViewOptions {
   /**
@@ -10,7 +12,7 @@ export interface UseExactViewOptions {
    * - number: 设置为数字时，将精准匹配对应路由的视图组件，且在调用该函数的组件下所有视图组件**支持再嵌套** `<RouterView>`！
    * - null: 默认值，将还原 `<RouterView>` 渲染逻辑
    */
-  exact: MaybeRefOrGetter<boolean | number | null>
+  exact: MaybeRef<ExactValue> | ComputedRef<ExactValue> | ((viewDepth: number) => ExactValue)
 }
 
 export function useExactView(options: UseExactViewOptions | Reactive<UseExactViewOptions>): void {
@@ -19,8 +21,10 @@ export function useExactView(options: UseExactViewOptions | Reactive<UseExactVie
   provide(
     viewDepthKey,
     computed(() => {
-      const exactValue = toValue(options.exact)
       const viewDepthValue = toValue(viewDepth)
+      const exactValue = isFunction(options.exact)
+        ? options.exact(viewDepthValue)
+        : toValue(options.exact)
 
       if (exactValue == null) {
         return viewDepthValue
