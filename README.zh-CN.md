@@ -75,16 +75,16 @@ app.use(BetterRouterView)
 
 #### 解决方案
 
-通过 `resolveViewKey` 自定义缓存标识：
+通过 `cacheBy` 自定义缓存标识：
 
 ```html
 <script
   setup
   lang="ts"
 >
-  import { BetterRouterView, type ResolveViewKey } from 'vue-router-better-view'
+  import { BetterRouterView, type RouteCacheBy } from 'vue-router-better-view'
 
-  const resolveViewKey: ResolveViewKey = (route) => {
+  const cacheBy: RouteCacheBy = (route) => {
     // 若路由标记为单例，则按 path 缓存
     if (route.meta.singleton) return route.path
     // 否则按 fullPath 缓存（包含参数）
@@ -96,9 +96,9 @@ app.use(BetterRouterView)
   <main>
     <better-router-view
       v-slot="{ Component }"
-      :resolve-view-key="resolveViewKey"
+      :cache-by="cacheBy"
     >
-      <!-- include、exclude 可以根据 resolveViewKey 的返回值进行缓存处理 -->
+      <!-- include、exclude 可以根据 cacheBy 的返回值进行缓存处理 -->
       <keep-alive>
         <component :is="Component" />
       </keep-alive>
@@ -194,7 +194,7 @@ interface BetterRouterViewProps extends RouterViewProps {
    * @param route 当前路由
    * @returns 视图组件标识
    */
-  resolveViewKey?: ResolveViewKey
+  cacheBy?: RouteCacheBy
   /**
    * 是否精准匹配当前路由的视图
    * - boolean: 设为 `true` 时将精准匹配当前路由的视图组件，但在调用该函数的组件下所有视图组件将**无法再嵌套** `<RouterView>`！

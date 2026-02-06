@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { PlusRouteRecordRaw } from 'plus-pro-components'
-import type { ResolveViewKey } from 'vue-router-better-view'
+import type { RouteCacheBy } from 'vue-router-better-view'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Logo from '@/assets/logo.svg'
 import { keepAliveValues } from '@/stores/keepAlive'
 
-const resolveViewKey: ResolveViewKey = (route) => {
+const cacheBy: RouteCacheBy = (route) => {
   if (route.meta.keepAlive) {
     return route.meta.singleton ? route.path : route.fullPath
   }
@@ -47,7 +47,7 @@ watch(
   >
     <BetterRouterView
       v-slot="{ Component: viewComponent }"
-      :resolve-view-key
+      :cache-by="cacheBy"
       exact
     >
       <KeepAlive :include="[...keepAliveValues]">

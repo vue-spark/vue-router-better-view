@@ -22,13 +22,22 @@ export interface SlotData {
   Component: VNode
 }
 
-export type ResolveViewKey = (
+export type RouteCacheBy = (
   route: RouteLocationNormalizedLoaded,
 ) => string | void | undefined | null
+
+/**
+ * @deprecated Use `RouteCacheBy` instead.
+ */
+export type ResolveViewKey = RouteCacheBy
 
 export type ExactFn = (matchedRoute: RouteLocationMatched) => boolean
 
 export interface BetterRouterViewProps extends RouterViewProps {
+  cacheBy?: RouteCacheBy
+  /**
+   * @deprecated Use `cacheBy` instead.
+   */
   resolveViewKey?: ResolveViewKey
   exact?: boolean | number | null
 }
@@ -37,6 +46,9 @@ const BetterRouterViewImpl = /* #__PURE__ */ defineComponent({
   name: 'BetterRouterView',
   inheritAttrs: false,
   props: {
+    cacheBy: {
+      type: Function,
+    },
     resolveViewKey: {
       type: Function,
     },
@@ -50,7 +62,8 @@ const BetterRouterViewImpl = /* #__PURE__ */ defineComponent({
     const wrappers = getWrappers(app)
 
     function createViewWrapper({ route, Component: viewComponent }: SlotData): RouteComponent {
-      const name = props.resolveViewKey?.(route)
+      const resolveCacheKey = (props.cacheBy ?? props.resolveViewKey) as RouteCacheBy | undefined
+      const name = resolveCacheKey?.(route)
       if (!name) {
         return viewComponent
       }

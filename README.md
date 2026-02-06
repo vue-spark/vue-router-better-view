@@ -75,16 +75,16 @@ By default, `/user/1` and `/user/2` are treated as same component, preventing fi
 
 #### Solution
 
-Custom cache identifier via `resolveViewKey`:
+Custom cache identifier via `cacheBy`:
 
 ```html
 <script
   setup
   lang="ts"
 >
-  import { BetterRouterView, type ResolveViewKey } from 'vue-router-better-view'
+  import { BetterRouterView, type RouteCacheBy } from 'vue-router-better-view'
 
-  const resolveViewKey: ResolveViewKey = (route) => {
+  const cacheBy: RouteCacheBy = (route) => {
     // Cache by path if marked as singleton
     if (route.meta.singleton) return route.path
     // Cache by fullPath (including params) otherwise
@@ -96,9 +96,9 @@ Custom cache identifier via `resolveViewKey`:
   <main>
     <better-router-view
       v-slot="{ Component }"
-      :resolve-view-key="resolveViewKey"
+      :cache-by="cacheBy"
     >
-      <!-- Include/exclude based on resolveViewKey value -->
+      <!-- Include/exclude based on cacheBy value -->
       <keep-alive>
         <component :is="Component" />
       </keep-alive>
@@ -195,7 +195,7 @@ interface BetterRouterViewProps extends RouterViewProps {
    * @param route Current route
    * @returns View component identifier
    */
-  resolveViewKey?: ResolveViewKey
+  cacheBy?: RouteCacheBy
   /**
    * Whether to enable precise route matching
    * - boolean: `true` enables precise matching but disallows nested RouterView
