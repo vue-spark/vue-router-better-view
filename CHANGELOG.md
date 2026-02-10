@@ -1,15 +1,25 @@
 # Changelog
 
+## [1.2.0](https://github.com/vue-spark/vue-router-better-view/compare/v1.1.0...v1.2.0) (2026-02-10)
+
+### Chores
+
+- vue-router 升级到 v5 ([709fa85](https://github.com/vue-spark/vue-router-better-view/commit/709fa85638105a578ab129729b814a2b392e0555))
+
+### Refactors
+
+- rename `resolveViewKey` prop to `cacheBy` with backward compatibility ([7401910](https://github.com/vue-spark/vue-router-better-view/commit/7401910973acd74fd8640835c1ee12da781f4f5c))
+
 ## [1.1.0](https://github.com/vue-spark/vue-router-better-view/compare/v1.0.0...v1.1.0) (2025-09-25)
 
 ### Features
 
-* **hooks:** use-exact-view 的 exact 作为函数时传入 viewDepth ([7f2c172](https://github.com/vue-spark/vue-router-better-view/commit/7f2c172573225de74d19e1cc58d3e3122deee8e5))
+- **hooks:** use-exact-view 的 exact 作为函数时传入 viewDepth ([7f2c172](https://github.com/vue-spark/vue-router-better-view/commit/7f2c172573225de74d19e1cc58d3e3122deee8e5))
 
 ### Docs
 
-* 优化 README 文件中的赞助信息 ([e02c2d8](https://github.com/vue-spark/vue-router-better-view/commit/e02c2d8cf07d1ba47d57ab8b2949949a7cb6cb5a))
-* **readme:** 更新路由示例组件名称 ([898f19b](https://github.com/vue-spark/vue-router-better-view/commit/898f19bb96d5654e1df8f19bf45af11f905cc57c))
+- 优化 README 文件中的赞助信息 ([e02c2d8](https://github.com/vue-spark/vue-router-better-view/commit/e02c2d8cf07d1ba47d57ab8b2949949a7cb6cb5a))
+- **readme:** 更新路由示例组件名称 ([898f19b](https://github.com/vue-spark/vue-router-better-view/commit/898f19bb96d5654e1df8f19bf45af11f905cc57c))
 
 ## [1.0.0](https://github.com/vue-spark/vue-router-better-view/compare/v0.1.0...v1.0.0) (2025-07-27)
 
